@@ -1,0 +1,55 @@
+{:itonami.blueprint/id "cloud-itonami-isic-4290"
+ :itonami.blueprint/name "Construction of Other Civil Engineering Projects"
+ :itonami.blueprint/isic-rev5 "4290"
+ :itonami.blueprint/domain :construction/other-civil-engineering
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:worker-safety :buried-utility-strike-prevention :excavation-collapse-prevention]
+ :itonami.blueprint/governor :civilworks-governor
+ :itonami.blueprint/robotics false
+ :itonami.blueprint/required-technologies [:identity :forms :audit-ledger :notifications]
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/implemented-slice
+ "`:civilworks-governor` is implemented end-to-end in `src/civilworks` as
+ an OTHER-CIVIL-ENGINEERING-PROJECT OPERATIONS COORDINATION actor -- Civil
+ Works Advisor (LLM proposal-only) ⊣ Civil Works Governor (closed-op-
+ allowlist / site-and-permit-verification / pre-work buried-utility-
+ survey / excavation-shoring / unresolved-concern hard-gates).
+ Deliberately narrower in authority than the `cloud-itonami-isic-4211`
+ (community building construction) robotics-premise reference this actor
+ follows structurally, and structured after the sibling
+ `cloud-itonami-isic-4329` (other construction installation) and
+ `cloud-itonami-isic-4390` (other specialized construction activities)
+ coordination-only actors: `:itonami.blueprint/robotics` is honestly
+ `false` here -- this actor holds NO heavy-equipment-control authority and
+ NO structural-completion-sign-off authority (both are HARD, permanent
+ governor blocks, never overridable by human approval -- see
+ `civilworks.governor` ns docstring). Every one of its four proposal ops
+ (`:log-site-record` / `:schedule-construction-operation` / `:flag-
+ safety-concern` / `:order-supplies`) carries `:effect :propose` ONLY --
+ the governor HARD-holds any proposal that doesn't
+ (`effect-not-propose-violations`), a structural invariant distinguishing
+ this actor from siblings that DO commit real-world actuation effects.
+ Covers the RESIDUAL civil-engineering category -- construction of
+ industrial plants (process/manufacturing-facility civil works),
+ pipelines (long-distance and local, excluding the utility-network
+ projects `cloud-itonami-isic-4220` already covers), power-line/electric-
+ transmission-line construction, and outdoor sports facilities (running
+ tracks, sports fields, playgrounds) -- work not elsewhere classified in
+ ISIC division 42 (distinct from `cloud-itonami-isic-4211`/`4212`
+ buildings/roads-and-railways and `cloud-itonami-isic-4220` utility-
+ network projects, both already `:implemented` in this fleet).
+ Per-jurisdiction pre-work buried-utility/ground-condition survey and
+ excavation-shoring legal-basis catalog (JPN/USA/DEU, `civilworks.facts`)
+ with real official sources (independently verified against
+ laws.e-gov.go.jp / osha.gov / dguv.de before being written), and
+ mail+phone safety-concern notification (`civilworks.notify`, a portable
+ `.cljc` caller-injected transport seam -- no JVM interop, per this
+ repo's cljs-first mandate) to the site's supervisor/safety-officer
+ contact roster. `:flag-safety-concern` ALWAYS escalates to a human, at
+ every phase, unconditionally. Like `cloud-itonami-isic-4329`/
+ `cloud-itonami-isic-4390`, `:schedule-construction-operation` here is
+ NOT a permanent `high-stakes` member -- it MAY auto-commit at phase 3
+ once every HARD check clears and confidence is high (see
+ `civilworks.governor`/`civilworks.phase` ns docstrings for the full
+ rationale)."}
