@@ -89,11 +89,19 @@ profile those siblings established for building-trade work (see
 `Actuation` below for the one structural similarity shared with those
 references).
 
-This repo is fully portable `.cljc` with **no JVM interop anywhere in
-`src/`** -- `civilworks.notify`'s real-transport seam (`fn-notifier`)
-takes caller-injected plain functions instead of embedding a
-`java.net.http` client, so the actor runs unmodified on JVM Clojure,
-ClojureScript, `nbb`, and `kotoba wasm`/`clojurewasm`.
+The actor itself is fully portable `.cljc` with **no JVM interop in any
+actor namespace** -- `civilworks.notify`'s real-transport seam
+(`fn-notifier`) takes caller-injected plain functions instead of
+embedding a `java.net.http` client, so the actor runs unmodified on JVM
+Clojure, ClojureScript, `nbb`, and `kotoba wasm`/`clojurewasm`.
+
+The one deliberate exception is `civilworks.render-html`
+(`src/civilworks/render_html.clj`), which is a **build-time tool, not
+part of the actor**: it is JVM-only `.clj` because it writes a file and
+reads the vendored `jp-go-dds` stylesheet off the classpath. Nothing in
+the actor graph requires, calls or depends on it, so the portability
+guarantee above is unaffected -- deleting it would not change a single
+proposal, verdict or committed record.
 
 ### Closed op-allowlist (4 ops, all `:effect :propose`)
 
@@ -158,10 +166,32 @@ governor checks still apply UNCONDITIONALLY regardless of phase; only
 the routing to a human vs. auto-commit changes.
 
 ```bash
-clojure -M:dev:run    # demo: full coordination episode + every HARD hold
-clojure -M:dev:test   # test suite
-clojure -M:lint       # clj-kondo, errors fail
+clojure -M:dev:run          # demo: full coordination episode + every HARD hold
+clojure -M:dev:test         # test suite
+clojure -M:lint             # clj-kondo, errors fail
+clojure -M:dev:render-html  # regenerate docs/samples/operator-console.html
 ```
+
+### Operator console (`docs/samples/operator-console.html`)
+
+A read-only sample console **generated at build time from a real actor
+run** -- `civilworks.render-html` seeds the store, drives 17 operations
+through the real graph (`intake → advise → govern → decide → commit |
+hold | request-approval`), and renders that run's actual output. Every
+id, number, rule name, violation detail, record id and citation on the
+page is read back out of the resulting store/ledger; none of it is
+hand-written HTML. The run reaches all five dispositions the actor can
+produce -- auto-commit, human-approved, human-rejected, HARD governor
+hold, and rollout-phase hold -- including 8 holds that never reach a
+human at all.
+
+It is deterministic: the stack is pure with an in-memory checkpointer
+and nothing reads a clock, so two runs from the same seed are
+byte-identical (`cmp` them to check). It is also self-policing --
+`-main` **refuses to write the file** if the run produced zero
+`:governor-hold` ledger facts, so a scenario that quietly stopped
+demonstrating HARD holds fails the build instead of publishing a page
+that misrepresents the actor's posture.
 
 ## License
 
