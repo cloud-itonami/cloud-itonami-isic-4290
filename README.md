@@ -96,7 +96,7 @@ embedding a `java.net.http` client, so the actor runs unmodified on JVM
 Clojure, ClojureScript, `nbb`, and `kotoba wasm`/`clojurewasm`.
 
 The one deliberate exception is `civilworks.render-html`
-(`src/civilworks/render_html.clj`), which is a **build-time tool, not
+(`src/civilworks/render_html.cljk`), which is a **build-time tool, not
 part of the actor**: it is JVM-only `.clj` because it writes a file and
 reads the vendored `jp-go-dds` stylesheet off the classpath. Nothing in
 the actor graph requires, calls or depends on it, so the portability
@@ -112,7 +112,7 @@ proposal, verdict or committed record.
 | `:flag-safety-concern` | surface a buried-utility-strike (gas/water/electrical/telecom conduit) / excavation-collapse / structural concern | Drafts a safety-concern flag; ALWAYS escalates to a human, unconditionally. Once approved, `civilworks.notify` sends the notice (mail + phone) to the site's supervisor/safety-officer contact roster. |
 | `:order-supplies` | materials/equipment procurement proposal | Drafts a supply-order proposal. Escalates above a cost threshold or below the confidence floor; may auto-commit at phase 3 otherwise. |
 
-**Legal basis is data, not code** -- `src/civilworks/facts.cljc`'s
+**Legal basis is data, not code** -- `src/civilworks/facts.cljk`'s
 `catalog` is the per-jurisdiction EDN source-of-truth the governor checks
 every `:schedule-construction-operation` proposal against (JPN/USA/DEU
 seeded; DEU stands in for the EU, the same convention
