@@ -1,5 +1,5 @@
 (ns civilworks.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks other-civil-engineering
+  "Demo driver -- `kbb -M:dev:run`. Walks other-civil-engineering
   sites through a full coordination episode, exercising every governor
   check: log a site record (auto-commits) -> propose a construction-
   operation schedule for a clean, verified site (AUTO-COMMITS at phase

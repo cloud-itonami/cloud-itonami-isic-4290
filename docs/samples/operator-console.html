@@ -2479,7 +2479,7 @@ img,svg { max-width: 100%; height: auto; }</style>
 <main>
   <section class="card">
     <h2>この run で実行された全オペレーション</h2>
-    <p class="muted">1 run = 1 langgraph StateGraph 実行（intake → advise → govern → decide → commit | hold | request-approval）。下の disposition と reason は、実行後の最終 state と <code>:audit</code> チャネルから読み出したもので、このページに手で書いた値は一つもない。<code>clojure -M:dev:render-html</code> で再生成される。</p>
+    <p class="muted">1 run = 1 langgraph StateGraph 実行（intake → advise → govern → decide → commit | hold | request-approval）。下の disposition と reason は、実行後の最終 state と <code>:audit</code> チャネルから読み出したもので、このページに手で書いた値は一つもない。<code>kbb -M:dev:render-html</code> で再生成される。</p>
     <table>
       <thead><tr><th>thread</th><th>op</th><th>site</th><th>内容</th><th>rollout phase</th><th>advisor confidence</th><th>disposition</th><th>reason</th></tr></thead>
       <tbody>
@@ -2635,7 +2635,7 @@ img,svg { max-width: 100%; height: auto; }</style>
   </section>
 </main>
 <footer>
-  <p class="muted">Generated at build time by <code>civilworks.render-html</code> (<code>clojure -M:dev:render-html</code>) from a real <code>civilworks.operation</code> actor run against <code>civilworks.store/seed-db</code>. Deterministic: no timestamps, no random ids — two runs from the same seed are byte-identical.</p>
+  <p class="muted">Generated at build time by <code>civilworks.render-html</code> (<code>kbb -M:dev:render-html</code>) from a real <code>civilworks.operation</code> actor run against <code>civilworks.store/seed-db</code>. Deterministic: no timestamps, no random ids — two runs from the same seed are byte-identical.</p>
 </footer>
 </body>
 </html>
