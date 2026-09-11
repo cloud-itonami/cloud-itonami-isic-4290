@@ -6,7 +6,7 @@
   namespace drives the REAL actor stack (`civilworks.operation` ->
   `civilworks.governor` -> `civilworks.phase` -> `civilworks.store`)
   through a scenario adapted from this repo's own `civilworks.sim` demo
-  driver (`clojure -M:dev:run`, confirmed BEFORE writing this file to
+  driver (`kbb -M:dev:run`, confirmed BEFORE writing this file to
   produce a sensible ledger against the real seeded site ids
   `site-1`..`site-8`), then renders that run's ACTUAL output.
 
@@ -40,7 +40,7 @@
   checkpointer, no jurisdiction/registry function reads a clock, and
   `store/all-sites` sorts by id. Nothing in the page body is a
   timestamp or a random id, so two runs from the same seed are
-  byte-identical (`clojure -M:dev:render-html a.html && clojure
+  byte-identical (`kbb -M:dev:render-html a.html && clojure
   -M:dev:render-html b.html && cmp a.html b.html`). Should this actor
   ever grow a clock, inject an epoch-ms constant from the caller --
   do not read one here.
@@ -54,7 +54,7 @@
   page that lies about the actor's posture. Making that a throw turns
   the requirement into a build-time invariant rather than a convention.
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [jp-go-dds.skin]
             [kotoba.lang.text :as str]
@@ -512,7 +512,7 @@
            "commit | hold | request-approval）。下の disposition と reason は、"
            "実行後の最終 state と <code>:audit</code> チャネルから読み出したもので、"
            "このページに手で書いた値は一つもない。"
-           "<code>clojure -M:dev:render-html</code> で再生成される。")
+           "<code>kbb -M:dev:render-html</code> で再生成される。")
       (table ["thread" "op" "site" "内容" "rollout phase" "advisor confidence" "disposition" "reason"]
              (run-rows runs)))
 
@@ -585,7 +585,7 @@
      "</main>\n"
      "<footer>\n"
      "  <p class=\"muted\">Generated at build time by <code>civilworks.render-html</code> "
-     "(<code>clojure -M:dev:render-html</code>) from a real "
+     "(<code>kbb -M:dev:render-html</code>) from a real "
      "<code>civilworks.operation</code> actor run against <code>civilworks.store/seed-db</code>. "
      "Deterministic: no timestamps, no random ids — two runs from the same seed are byte-identical.</p>\n"
      "</footer>\n"

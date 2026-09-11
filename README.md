@@ -166,10 +166,10 @@ governor checks still apply UNCONDITIONALLY regardless of phase; only
 the routing to a human vs. auto-commit changes.
 
 ```bash
-clojure -M:dev:run          # demo: full coordination episode + every HARD hold
-clojure -M:dev:test         # test suite
-clojure -M:lint             # clj-kondo, errors fail
-clojure -M:dev:render-html  # regenerate docs/samples/operator-console.html
+kbb -M:dev:run          # demo: full coordination episode + every HARD hold
+kbb -M:dev:test         # test suite
+kbb -M:lint             # clj-kondo, errors fail
+kbb -M:dev:render-html  # regenerate docs/samples/operator-console.html
 ```
 
 ### Operator console (`docs/samples/operator-console.html`)
