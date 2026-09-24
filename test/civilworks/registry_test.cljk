@@ -1,5 +1,5 @@
 (ns civilworks.registry-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [civilworks.registry :as r]))
 
 ;; ----------------------------- register-site-record -----------------------------
