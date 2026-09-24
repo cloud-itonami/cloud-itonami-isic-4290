@@ -56,7 +56,7 @@
 
   Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
-  (:require [jp-go-dds.skin]
+  (:require [kotoba.io :as kio] [jp-go-dds.skin]
             [kotoba.lang.text :as str]
             [civilworks.facts :as facts]
             [civilworks.governor :as governor]
@@ -610,8 +610,8 @@
                       {:out out
                        :ledger-facts (count ledger)
                        :fact-types (frequencies (map :t ledger))})))
-    (let [parent (.getParentFile (java.io.File. ^String out))]
-      (when parent (.mkdirs parent)))
+    (let [parent (kio/parent-file (kio/file ^String out))]
+      (when parent (kio/mkdirs parent)))
     (spit out (render result))
     (println "wrote" out
              (str "(" (count ledger) " ledger facts, "
