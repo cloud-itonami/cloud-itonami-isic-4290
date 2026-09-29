@@ -14,12 +14,12 @@
  ;; heavy-equipment/crew actions, only proposes, schedules, flags and logs,
  ;; all governor- and human-gated (see README). Per this repo's mandate
  ;; (cljs-first / fully portable `.cljc`, no JVM interop -- see
- ;; superproject CLAUDE.md `.cljc`/`.kotoba` runtime priority note),
+ ;; superproject AGENTS.md `.cljc`/`.kotoba` runtime priority note),
  ;; `civilworks.notify`'s real transport is a plain-function INJECTION
  ;; seam (`fn-notifier`) -- unlike some earlier sibling actors' notify.cljc,
  ;; this repo does NOT embed a `java.net.http`/platform HTTP client itself.
  ;; jp-go-digital-design-system (DADS) is this workspace's BASE design
- ;; system (superproject CLAUDE.md, 2026-08-05). `civilworks.render-html`
+ ;; system (superproject AGENTS.md, 2026-08-05). `civilworks.render-html`
  ;; styles the build-time operator console with `jp-go-dds.skin/dds+skin`
  ;; -- the compatibility skin that restyles plain semantic markup with
  ;; DADS tokens without inventing a second design system or writing raw
